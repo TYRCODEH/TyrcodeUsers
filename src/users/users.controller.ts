@@ -8,28 +8,30 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @MessagePattern('createUser')
+  @MessagePattern('create_user')
   create(@Payload() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @MessagePattern('findAllUsers')
+  @MessagePattern('list_users')
   findAll() {
     return this.usersService.findAll();
   }
 
-  @MessagePattern('findOneUser')
-  findOne(@Payload() id: number) {
+  @MessagePattern('list_users_id')
+  findOne(@Payload() id: any) {
+    console.log(id, 'zzzzzzzzzzz');
+
     return this.usersService.findOne(id);
   }
 
-  @MessagePattern('updateUser')
+  @MessagePattern('update_users')
   update(@Payload() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(updateUserDto.id, updateUserDto);
+    return this.usersService.update(updateUserDto);
   }
 
-  @MessagePattern('removeUser')
-  remove(@Payload() id: number) {
+  @MessagePattern('delete_users')
+  remove(@Payload() id: any) {
     return this.usersService.remove(id);
   }
 }
